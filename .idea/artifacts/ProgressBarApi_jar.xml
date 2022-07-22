@@ -1,0 +1,10 @@
+<component name="ArtifactManager">
+  <artifact name="ProgressBarApi:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/ProgressBarApi_jar</output-path>
+    <root id="root">
+      <element id="archive" name="ProgressBarApi.jar">
+        <element id="module-output" name="ProgressBarApi" />
+      </element>
+    </root>
+  </artifact>
+</component>
