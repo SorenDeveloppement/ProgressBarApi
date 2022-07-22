@@ -2,6 +2,8 @@ package fr.galaglow.pbar;
 
 import fr.galaglow.pbar.utils.ProgressBarType;
 
+import java.util.Collections;
+
 public class ProgressBar {
 
     private ProgressBarType pBType;
@@ -46,31 +48,25 @@ public class ProgressBar {
         this.percent = (this.actualValue * 100) / this.maxValue;
 
         if (this.pBType.equals(ProgressBarType.PERCENT)) {
-            System.out.println(percent + "%");
+            String string = '\r' +
+                    String.join("", Collections.nCopies(percent == 0 ? 2 : 2 - (int) (Math.log10(percent)), " ")) +
+                    String.format(" %d%% ", percent) +
+                    String.format(" %d/%d", actualValue, maxValue);
+
+            System.out.print(string);
+
         } else {
-            if (percent < 10) {
-                System.out.println("[----------] " + percent + "%");
-            } else if (percent >= 10 && percent < 20) {
-                System.out.println("[=---------] " + percent + "%");
-            } else if (percent >= 20 && percent < 30) {
-                System.out.println("[==--------] " + percent + "%");
-            } else if (percent >= 30 && percent < 40) {
-                System.out.println("[===-------] " + percent + "%");
-            } else if (percent >= 40 && percent < 50) {
-                System.out.println("[====------] " + percent + "%");
-            } else if (percent >= 50 && percent < 60) {
-                System.out.println("[=====-----] " + percent + "%");
-            } else if (percent >= 60 && percent < 70) {
-                System.out.println("[======----] " + percent + "%");
-            } else if (percent >= 70 && percent < 80) {
-                System.out.println("[=======---] " + percent + "%");
-            } else if (percent >= 80 && percent < 90) {
-                System.out.println("[========--] " + percent + "%");
-            } else if (percent >= 90 && percent < 100) {
-                System.out.println("[=========-] " + percent + "%");
-            } else if (percent == 100) {
-                System.out.println("[==========] " + percent + "%");
-            }
+            String string = '\r' +
+                    String.join("", Collections.nCopies(percent == 0 ? 2 : 2 - (int) (Math.log10(percent)), " ")) +
+                    String.format(" %d%% [", percent) +
+                    String.join("", Collections.nCopies(percent, "=")) +
+                    '>' +
+                    String.join("", Collections.nCopies(100 - percent, " ")) +
+                    ']' +
+                    String.join("", Collections.nCopies((int) ((long) (Math.log10(maxValue)) - (long) (Math.log10(actualValue))), " ")) +
+                    String.format(" %d/%d", actualValue, maxValue);
+
+            System.out.print(string);
         }
     }
 
@@ -105,5 +101,4 @@ public class ProgressBar {
     public void setpBType(ProgressBarType pBType) {
         this.pBType = pBType;
     }
-
 }
