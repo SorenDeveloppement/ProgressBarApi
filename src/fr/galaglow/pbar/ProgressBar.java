@@ -42,8 +42,8 @@ public class ProgressBar {
     }
 
     public void update(Integer updatedActualValue) {
-        setActualValue(updatedActualValue);
-        this.percent = (this.actualValue / this.maxValue) * 100;
+        this.actualValue = updatedActualValue;
+        this.percent = (this.actualValue * 100) / this.maxValue;
 
         if (this.pBType.equals(ProgressBarType.PERCENT)) {
             System.out.println(percent + "%");
